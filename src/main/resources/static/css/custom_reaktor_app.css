@@ -15,8 +15,8 @@
 }
 
 #menu-toggle{
-    position: fixed !important;
-    right: 2px;
+    position: absolute !important;
+    left: 2px;
     top: 0;
     background-color: black;
 }
@@ -28,6 +28,25 @@
     margin: 0 !important;
     padding: 0;
 }
+.custom_footer{
+    background-color: darkblue;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    align-content: center;
+    margin: auto;
+}
+.custom_footer span{
+    text-align: center;
+}
+.custom_footer span a{
+    color: gray;
+    align-content: center;
+}
+
 /* #sidebar-wrapper{
     max-width: 25%;
 } */
