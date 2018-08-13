@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import reaktor.reaktorapp.model.entity.Contact;
+import reaktor.reaktorapp.model.entity.User;
 import reaktor.reaktorapp.model.form.RegisterUserForm;
 import reaktor.reaktorapp.service.ContactService;
 import reaktor.reaktorapp.service.UserService;
@@ -29,17 +30,9 @@ public class MainController {
         this.contactService = contactService;
     }
 
-
-    @Autowired
-    public MainController(UserService userService, ContactService contactService, AutoMailingService autoMailingService) {
-        this.userService = userService;
-        this.contactService = contactService;
-        this.autoMailingService = autoMailingService;
-    }
-
     @GetMapping("/")
-    public String home (Model model, Authentication auth){
-        if(auth != null){
+    public String home(Model model, Authentication auth) {
+        if (auth != null) {
             UserDetails principal = (UserDetails) auth.getPrincipal();
             model.addAttribute("principal", principal);
         }
@@ -47,102 +40,75 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(){
-        return "loginPage";
-    }
-
-
-
-    @GetMapping("/register")
-    public String register(Model model, Authentication auth){
-        RegisterUserForm user = new RegisterUserForm();
-        model.addAttribute("registerUserForm", user);
-        if(auth != null){
+    public String login(Model model, Authentication auth) {
+        if (auth != null) {
             UserDetails principal = (UserDetails) auth.getPrincipal();
             model.addAttribute("principal", principal);
         }
-                return "registerPage";
+        return "loginPage";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model, Authentication auth) {
+        RegisterUserForm user = new RegisterUserForm();
+        model.addAttribute("registerUserForm", user);
+        if (auth != null) {
+            UserDetails principal = (UserDetails) auth.getPrincipal();
+            model.addAttribute("principal", principal);
+        }
+        return "registerPage";
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute @Valid RegisterUserForm registerUserForm,
                            BindingResult bindingResult,
                            Authentication auth,
-                           Model model){
-        if (bindingResult.hasErrors()){
+                           Model model) {
+        if (bindingResult.hasErrors()) {
             return "registerPage";
         }
-        System.out.println(registerUserForm.toString());
+
         User user = userService.createUser(registerUserForm);
-        if(auth != null){
+        if (auth != null) {
             UserDetails principal = (UserDetails) auth.getPrincipal();
             model.addAttribute("principal", principal);
         }
-<<<<<<< HEAD
-
-=======
         userService.createUser(registerUserForm);
->>>>>>> 88c39c17c6e0b9328b5663acedbd79173ad9c2ca
         return "redirect:/";
     }
 
-
     @GetMapping("/contact")
-    public String contact(Model model){
-            Contact contact = new Contact();
-            model.addAttribute("contact", contact);
+    public String contact(Authentication auth, Model model) {
+        if (auth != null) {
+            UserDetails principal = (UserDetails) auth.getPrincipal();
+            model.addAttribute("principal", principal);
+        }
+        Contact contact = new Contact();
+        model.addAttribute("contact", contact);
         return "contactPage";
     }
 
     @PostMapping("/contact")
-    public String contact(@ModelAttribute @Valid Contact contact, BindingResult bindingResult, Model model){
-        String info="";
-        if (bindingResult.hasErrors()){
-<<<<<<< HEAD
+    public String contact(@ModelAttribute @Valid Contact contact, BindingResult bindingResult, Model model, Authentication auth) {
+        String info = "";
+        if (bindingResult.hasErrors()) {
             info = "Występują błędy formularza";
-            model.addAttribute("info",info );
+            model.addAttribute("info", info);
+            info = "Występują błędy formularza";
+            model.addAttribute("info", info);
             return "contactPage";
-=======
-//            info = "Występują błędy formularza";
-//            model.addAttribute("info",info );
-            return "contactForm";
->>>>>>> 88c39c17c6e0b9328b5663acedbd79173ad9c2ca
         }
-        System.out.println(contact.getEmail());
         // zapis do DB poprzez ContactService
         contactService.createContact(contact);
-
         //auto-email
-<<<<<<< HEAD
-//        autoMailingService.sendSimpleMessage(contact.getEmail(), "Potwierdzenie wysłania formularza","Dzjękujemy za kontakt. Niezwłocznie się do Ciebie odezwiemy" );
+        //autoMailingService.sendSimpleMessage(contact.getEmail(), "Potwierdzenie wysłania formularza","Dzjękujemy za kontakt. Niezwłocznie się do Ciebie odezwiemy" );
 
-        contact.setSubject("");
-        contact.setEmail("");
-        contact.setMessage("");
+//        contact.setSubject("");
+//        contact.setEmail("");
+//        contact.setMessage("");
         info = "Wysłano wiadomość";
-        model.addAttribute("info",info);
+        model.addAttribute("info", info);
         return "contactPage";
     }
-    @GetMapping("/addEditionPage")
-    public String addEditionPage(Model model, Authentication auth){
-        return "addEditionPage";
-=======
-
-//        autoMailingService.sendSimpleMessage("Dzjękujemy za kontakt. Niezwłocznie się do Ciebie odezwiemy", "Potwierdzenie wysłania formularza", contact.getEmail() );
-////
-//        contact.setSubject("");
-//        contact.setMessage("");
-//        contact.setEmail("");
-
-//        info = "Wysłano wiadomość";
-//        model.addAttribute("info",info );
-        return "redirect:/contact";
->>>>>>> 88c39c17c6e0b9328b5663acedbd79173ad9c2ca
-    }
-
-
-
-
-
 }
 
