@@ -40,8 +40,8 @@
                 </a>
             </li>
             <li>
-                <a class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</a>
-                <a class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</a>
+                <p class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</p>
+                <p class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</p>
                 <a class="navbar-brand" th:if="${principal!=null}" th:href="@{/logout}" th:method="post">Wyloguj</a>
             </li>
             <li>
@@ -76,7 +76,7 @@
 
             </div>
             <!-- Page Content -->
-            <label th:text="${info}">info</label>
+            <!--<label th:text="${info}">info</label>-->
             <form th:align="center" th:action="@{/contact}" th:object="${contact}" th:method="post">
                 <label>Temat</label><br>
                 <input th:align="center" th:field="*{subject}" th:type="text">

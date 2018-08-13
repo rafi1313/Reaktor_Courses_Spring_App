@@ -14,11 +14,8 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private boolean active;
+    private boolean active =false;
     private String permission = "USER";
-    @ManyToMany
-    @JoinTable(name = "user_edition")
-    private Set<Edition> editions;
     private int gradeProject1;
     private String gradeDesciptionProject1;
     private int gradeProject2;
@@ -28,6 +25,10 @@ public class User {
     private int gradeProject4;
     private String gradeDesciptionProject4;
 
+    @ManyToMany
+    @JoinTable(name = "user_edition")
+    private Set<Edition> editions;
+
     public User() {}
 
     public User(String email, String password, String firstName, String lastName) {
@@ -35,24 +36,6 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public User(String email, String password, String firstName, String lastName, boolean active, String permission, Set<Edition> editions, int gradeProject1, String gradeDesciptionProject1, int gradeProject2, String gradeDesciptionProject2, int gradeProject3, String gradeDesciptionProject3, int gradeProject4, String gradeDesciptionProject4) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.active = active;
-        this.permission = permission;
-        this.editions = editions;
-        this.gradeProject1 = gradeProject1;
-        this.gradeDesciptionProject1 = gradeDesciptionProject1;
-        this.gradeProject2 = gradeProject2;
-        this.gradeDesciptionProject2 = gradeDesciptionProject2;
-        this.gradeProject3 = gradeProject3;
-        this.gradeDesciptionProject3 = gradeDesciptionProject3;
-        this.gradeProject4 = gradeProject4;
-        this.gradeDesciptionProject4 = gradeDesciptionProject4;
     }
 
     public Long getId() {
@@ -109,14 +92,6 @@ public class User {
 
     public void setPermission(String permission) {
         this.permission = permission;
-    }
-
-    public Set<Edition> getEditions() {
-        return editions;
-    }
-
-    public void setEditions(Set<Edition> editions) {
-        this.editions = editions;
     }
 
     public int getGradeProject1() {
@@ -181,5 +156,13 @@ public class User {
 
     public void setGradeDesciptionProject4(String gradeDesciptionProject4) {
         this.gradeDesciptionProject4 = gradeDesciptionProject4;
+    }
+
+    public Set<Edition> getEditions() {
+        return editions;
+    }
+
+    public void setEditions(Set<Edition> editions) {
+        this.editions = editions;
     }
 }

@@ -33,8 +33,8 @@
                 </a>
             </li>
             <li>
-                <a class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</a>
-                <a class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</a>
+                <p class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</p>
+                <p class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</p>
                 <a class="navbar-brand" th:if="${principal!=null}" th:href="@{/logout}" th:method="post">Wyloguj</a>
             </li>
             <li>

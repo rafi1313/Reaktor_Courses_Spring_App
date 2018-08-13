@@ -1,5 +1,6 @@
 package reaktor.reaktorapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,14 @@ public class MainController {
     ContactService contactService;
     AutoMailingService autoMailingService;
 
+
+    @Autowired
+    public MainController(UserService userService, ContactService contactService, AutoMailingService autoMailingService) {
+        this.userService = userService;
+        this.contactService = contactService;
+        this.autoMailingService = autoMailingService;
+    }
+
     @GetMapping("/")
     public String home (Model model, Authentication auth){
         if(auth != null){
@@ -40,26 +49,30 @@ public class MainController {
 
     @GetMapping("/register")
     public String register(Model model, Authentication auth){
+        RegisterUserForm user = new RegisterUserForm();
+        model.addAttribute("registerUserForm", user);
         if(auth != null){
             UserDetails principal = (UserDetails) auth.getPrincipal();
             model.addAttribute("principal", principal);
         }
-        RegisterUserForm user = new RegisterUserForm();
-        model.addAttribute("registerUserForm", user);
-        return "registerPage";
+                return "registerPage";
     }
 
     @PostMapping("/register")
-    public String register(Authentication auth, Model model, BindingResult bindingResult, @ModelAttribute @Valid RegisterUserForm registerUserForm){
+    public String register(@ModelAttribute @Valid RegisterUserForm registerUserForm,
+                           BindingResult bindingResult,
+                           Authentication auth,
+                           Model model){
         if (bindingResult.hasErrors()){
             return "registerPage";
         }
-
+        System.out.println(registerUserForm.toString());
+        User user = userService.createUser(registerUserForm);
         if(auth != null){
             UserDetails principal = (UserDetails) auth.getPrincipal();
             model.addAttribute("principal", principal);
         }
-        User user = userService.createUser(registerUserForm);
+
         return "redirect:/";
     }
 
@@ -77,20 +90,20 @@ public class MainController {
         if (bindingResult.hasErrors()){
             info = "Występują błędy formularza";
             model.addAttribute("info",info );
-            return "contactForm";
+            return "contactPage";
         }
         // zapis do DB poprzez ContactService
         contactService.createContact(contact);
 
         //auto-email
-        autoMailingService.sendSimpleMessage(contact.getEmail(), "Potwierdzenie wysłania formularza","Dzjękujemy za kontakt. Niezwłocznie się do Ciebie odezwiemy" );
+//        autoMailingService.sendSimpleMessage(contact.getEmail(), "Potwierdzenie wysłania formularza","Dzjękujemy za kontakt. Niezwłocznie się do Ciebie odezwiemy" );
 
         contact.setSubject("");
         contact.setEmail("");
         contact.setMessage("");
         info = "Wysłano wiadomość";
-
-        return "contactForm";
+        model.addAttribute("info",info);
+        return "contactPage";
     }
     @GetMapping("/addEditionPage")
     public String addEditionPage(Model model, Authentication auth){

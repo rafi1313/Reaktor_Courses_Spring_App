@@ -1,25 +1,26 @@
 package reaktor.reaktorapp.model.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Typ nie może być pusty!")
     private String type;
+    @NotBlank(message = "Akronim nie może być pusty!")
     private String acronym;
-    @ManyToMany(mappedBy = "editions")
-    private Set<User> userSet;
 
     public Edition() {
     }
 
-    public Edition(String type, String acronym, Set<User> userSet) {
+    public Edition(String type, String acronym) {
         this.type = type;
         this.acronym = acronym;
-        this.userSet = userSet;
     }
 
     public Long getId() {
@@ -44,13 +45,5 @@ public class Edition {
 
     public void setAcronym(String acronym) {
         this.acronym = acronym;
-    }
-
-    public Set<User> getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
     }
 }
