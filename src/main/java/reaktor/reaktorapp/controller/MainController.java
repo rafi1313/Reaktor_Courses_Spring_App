@@ -1,5 +1,6 @@
 package reaktor.reaktorapp.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,22 +20,22 @@ public class MainController {
     AutoMailingService autoMailingService;
 
     @GetMapping("/")
-    public String home (){
+    public String home (Model model, Authentication auth){
         return "homepage";
     }
 
     @GetMapping("/logowanie")
-    public String login(){
+    public String login(Model model, Authentication auth){
         return "loginPage";
     }
 
     @GetMapping("/contact")
-    public String contact(){
+    public String contact(Model model, Authentication auth){
         return "contactPage";
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model, Authentication auth){
         return "registerPage";
     }
 
@@ -61,19 +62,16 @@ public class MainController {
         return "contactForm";
     }
     @GetMapping("/addEditionPage")
-    public String add(){
+    public String addEditionPage(Model model, Authentication auth){
         return "addEditionPage";
     }
-    @GetMapping("/register")
-    public String editStudentsA(){
-        return "editStudentsPage";
-    }
+
     @GetMapping("/studentsListPage")
-    public String studentsListPage(){
+    public String studentsListPage(Model model, Authentication auth){
         return "studentsListPage";
     }
     @GetMapping("/userProfile")
-    public String userProfile(){
+    public String userProfile(Model model, Authentication auth){
         return "userProfile";
     }
 
