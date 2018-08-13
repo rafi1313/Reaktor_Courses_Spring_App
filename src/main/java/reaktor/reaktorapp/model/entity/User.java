@@ -1,7 +1,9 @@
 package reaktor.reaktorapp.model.entity;
 
+
 import javax.persistence.*;
 import java.util.Set;
+
 
 @Entity
 public class User {
@@ -16,7 +18,7 @@ public class User {
     private String permission = "USER";
     @ManyToMany
     @JoinTable(name = "user_edition")
-    Set<Edition> editions;
+    private Set<Edition> editions;
     private int gradeProject1;
     private String gradeDesciptionProject1;
     private int gradeProject2;
