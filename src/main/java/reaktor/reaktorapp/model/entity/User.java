@@ -29,6 +29,14 @@ public class User {
     private String gradeDesciptionProject4;
 
     public User() {}
+
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public User(String email, String password, String firstName, String lastName, boolean active, String permission, Set<Edition> editions, int gradeProject1, String gradeDesciptionProject1, int gradeProject2, String gradeDesciptionProject2, int gradeProject3, String gradeDesciptionProject3, int gradeProject4, String gradeDesciptionProject4) {
         this.email = email;
         this.password = password;
