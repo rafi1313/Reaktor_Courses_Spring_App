@@ -11,7 +11,6 @@ public class UserController {
     AutoMailingService autoMailingService;
 
     @Autowired
-
     public UserController(UserService userService, AutoMailingService autoMailingService) {
         this.userService = userService;
         this.autoMailingService = autoMailingService;

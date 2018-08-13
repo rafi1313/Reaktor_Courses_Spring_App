@@ -76,8 +76,6 @@ public class MainController {
     }
 
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 781cdfef1b568670b3ebcabc1d3e76d1721060b6
+

@@ -14,15 +14,23 @@ public class UserService {
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
-
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     public User createUser(RegisterUserForm registerUserForm){
         User user = new User();
+        user.setFirstName(registerUserForm.getFirstName());
+        user.setLastName(registerUserForm.getLastName());
+        user.setPassword(registerUserForm.getPassword());
+        user.setEmail(registerUserForm.getEmail());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         User savedUser = userRepository.save(user);
         return savedUser;
+    }
+
+
+    public User getUser(String email){
+        return userRepository.findOneByEmail(email);
     }
 }
