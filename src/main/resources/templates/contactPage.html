@@ -5,6 +5,122 @@
     <title>Title</title>
 </head>
 <body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Reaktor PWN App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom_reaktor_app.css">
+
+</head>
+
+<body>
+
+<div id="wrapper" class="container-fluid margin_0">
+
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="/">
+                    Reaktor App
+                </a>
+            </li>
+            <li>
+                <a class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</a>
+                <a class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</a>
+                <a class="navbar-brand" th:if="${principal!=null}" th:href="@{/logout}" th:method="post">Wyloguj</a>
+            </li>
+            <li>
+                <a href="/register">Rejestracja</a>
+            </li>
+            <li>
+                <a href="/login">Logowanie</a>
+            </li>
+            <li>
+                <a href="/userProfile">Profil</a>
+            </li>
+            <li>
+                <a href="/addEditionPage">Dodaj kurs</a>
+            </li>
+            <li>
+                <a href="/studentsListPage">Lista kursantów</a>
+            </li>
+            <li>
+                <a href="/contact">Kontakt</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <div id="page-content-wrapper" class="margin_0">
+        <div class="container-fluid margin_0">
+            <!-- PageHeader -->
+            <div class='row custom_header margin_0'>
+                <button href="#menu-toggle" class="btn btn-secondary menu_button" id="menu-toggle">Menu</button>
+                <h1>Masz pytanie? Skontaktuj się z nami</h1>
+
+
+            </div>
+            <!-- Page Content -->
+            <label th:text="${info}">info</label>
+            <form th:align="center" th:action="@{/contact}" th:object="${contact}" th:method="post">
+                <label>Temat</label><br>
+                <input th:align="center" th:field="*{subject}" th:type="text">
+                <span th:errors="*{subject}">error</span>
+                <br>
+                <label>Wiadomość</label><br>
+                <textarea th:align="center" th:type="text" th:field="*{message}" th:size="1400"></textarea>
+                <span th:errors="*{message}">error</span>
+                <br>
+                <label>E-mail</label><br>
+                <input th:align="center" th:type="email" th:field="*{email}">
+                <span th:errors="*{email}">error</span><br>
+                <br>
+                <input th:align="center"  th:type="submit" th:value="prześlij">
+            </form>
+
+            <footer class='row margin_0 custom_footer'>
+                <span>Created by <a href="https://github.com/rafi1313">Rafał Borkowski</a> and <a href="https://github.com/IDontMind">Maja Misiewicz</a> Copyright &copy; BootCamp Reaktor PWN 2018</span>
+                <!--<div>-->
+                <!--<p class="row copyright margin_0"></p>-->
+
+                <!--</div>-->
+            </footer>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+</body>
+
+</html>
 </body>
 </html>
