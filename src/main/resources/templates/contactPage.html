@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -76,14 +69,18 @@
 
             </div>
             <!-- Page Content -->
+<<<<<<< HEAD
             <!--<label th:text="${info}">info</label>-->
+=======
+          <!--/  <label th:text="${info}">info</label>-->
+>>>>>>> 88c39c17c6e0b9328b5663acedbd79173ad9c2ca
             <form th:align="center" th:action="@{/contact}" th:object="${contact}" th:method="post">
                 <label>Temat</label><br>
                 <input th:align="center" th:field="*{subject}" th:type="text">
                 <span th:errors="*{subject}">error</span>
                 <br>
                 <label>Wiadomość</label><br>
-                <textarea th:align="center" th:type="text" th:field="*{message}" th:size="1400"></textarea>
+                <textarea th:align="center" th:type="text" th:field="*{message}"></textarea>
                 <span th:errors="*{message}">error</span>
                 <br>
                 <label>E-mail</label><br>
@@ -121,6 +118,4 @@
 
 </body>
 
-</html>
-</body>
 </html>
