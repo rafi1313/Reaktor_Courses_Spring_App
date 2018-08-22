@@ -11,11 +11,11 @@
     <title>Reaktor PWN App</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/custom_reaktor_app.css">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom_reaktor_app.css">
 
 </head>
 
@@ -33,21 +33,22 @@
                 </a>
             </li>
             <li>
+                <form  th:action="@{/login-process}" th:method="post">
+                    <input th:type="text" th:name="email" th:placeholder="e-mail">
+                    <br>
+                    <input th:type="text" th:name="password" th:placeholder="hasło"><br>
+                    <input th:type="submit" th:value="zaloguj">
+                </form>
+
                 <a class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</a>
                 <a class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</a>
                 <a class="navbar-brand" th:if="${principal!=null}" th:href="@{/logout}" th:method="post">Wyloguj</a>
             </li>
             <li>
-                <a href="/register">Rejestracja</a>
+                <a href="/">Strona startowa</a>
             </li>
             <li>
-                <a href="/userProfile">Profil</a>
-            </li>
-            <li>
-                <a href="/addEditionPage">Dodaj kurs</a>
-            </li>
-            <li>
-                <a href="/studentsListPage">Lista kursantów</a>
+                <a href="/eegister">Rejestracja</a>
             </li>
             <li>
                 <a href="/contact">Kontakt</a>
@@ -61,28 +62,12 @@
             <!-- PageHeader -->
             <div class='row custom_header margin_0'>
                 <button href="#menu-toggle" class="btn btn-secondary menu_button" id="menu-toggle">Menu</button>
-                <h1>Z Reaktorem PWN zmień swoją przyszłość. Sprawdź nas!</h1>
+                <h1>Nie udało się zalogować</h1>
             </div>
             <!-- Page Content -->
 
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <h1 align="center">Rejestracja użytkownika</h1>
-                <form align="center" th:action="@{/register}" th:object="${registerUserForm}" th:method="post">
-                    <input class="form-control" th:type="text" th:field="*{firstName}" th:placeholder="imię">
-                    <span th:errors="*{firstName}">error</span>
-                    <br>
-                    <input class="form-control" th:type="text" th:field="*{lastName}" th:placeholder="Nazwisko">
-                    <span th:errors="*{lastName}">error</span>
-                    <br>
-                    <input class="form-control" th:type="text" th:field="*{email}" th:placeholder="email">
-                    <span th:errors="*{email}">error</span>
-                    <br>
-                    <input class="form-control" th:type="text" th:field="*{password}" th:placeholder="hasło">
-                    <span th:errors="*{password}">error</span>
-                    <br>
-                    <input class="btn btn-primary" id="sendMessageButton"  type="submit" value="zarejestuj">
-                </form>
-            </div>
+
+            <h2 align="center">Spróbuj jeszcze raz!</h2>
             <footer class='row margin_0 custom_footer'>
                 <span>Created by <a href="https://github.com/rafi1313">Rafał Borkowski</a> and <a href="https://github.com/IDontMind">Maja Misiewicz</a> Copyright &copy; BootCamp Reaktor PWN 2018</span>
                 <!--<div>-->
@@ -98,8 +83,8 @@
 <!-- /#wrapper -->
 
 <!-- Bootstrap core JavaScript -->
-<script src="../static/vendor/jquery/jquery.min.js"></script>
-<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Menu Toggle Script -->
 <script>

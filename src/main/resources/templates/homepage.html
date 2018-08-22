@@ -33,24 +33,23 @@
                 </a>
             </li>
             <li>
+                <form th:action="@{/login-process}" th:method="post">
+                    <div ><input th:type="text" th:name="email" th:placeholder="e-mail"></div>
+                    <br>
+                    <div style="width:5px; height:50px;"><input th:type="text" th:name="password" th:placeholder="hasło"></div>
+                    <br>
+                    <div style="margin-left:110px;"><input th:type="submit" th:value="zaloguj"></div>
+                </form>
+
                 <a class="navbar-brand" th:if="${principal==null}" th:text="niezalogowano">Login</a>
                 <a class="navbar-brand" th:if="${principal!=null}" th:text="${principal.getUsername()}">Login</a>
                 <a class="navbar-brand" th:if="${principal!=null}" th:href="@{/logout}" th:method="post">Wyloguj</a>
             </li>
             <li>
+                <a href="/">Strona startowa</a>
+            </li>
+            <li>
                 <a href="/register">Rejestracja</a>
-            </li>
-            <li>
-                <a href="/login">Logowanie</a>
-            </li>
-            <li>
-                <a href="/userProfile">Profil</a>
-            </li>
-            <li>
-                <a href="/addEditionPage">Dodaj kurs</a>
-            </li>
-            <li>
-                <a href="/studentsListPage">Lista kursantów</a>
             </li>
             <li>
                 <a href="/contact">Kontakt</a>
@@ -64,15 +63,29 @@
             <!-- PageHeader -->
             <div class='row custom_header margin_0'>
                 <button href="#menu-toggle" class="btn btn-secondary menu_button" id="menu-toggle">Menu</button>
-                <h1>Z Reaktorem PWN zmień swoją przyszłość. Sprawdź nas!</h1>
+                <div style="margin:50px 350px;"><h1>Z Reaktorem PWN zmień swoją przyszłość. Sprawdź nas!</h1></div>
             </div>
             <!-- Page Content -->
 
 
-           CONTENT
+            <div style="margin:50px">
+            <h3>Kurs Back–end Developer</h3>
+            <p>Back-end to silnik aplikacji, czyli wszystko to, co działa po stronie serwera, ale bez czego aplikacja nie mogłaby wykonywać określonych operacji. Programiści back-end projektują mechanizmy,
+                na podstawie których funkcjonuje cała aplikacja.</p>
+            <p>Czego nauczysz się w trakcie kursu?</p>
+                <ul>
+                <li>Git: system kontroli wersji</li>
+                <li>MYSQL: projektowanie relacyjnej bazy danych</li>
+                <li>Python: Stworzenie programu w języku Python wykorzystującego bazę danych MYSQL.</li>
+                <li>Java: Zaprojektowanie i stworzenie programu w języku Java implementującego bazę danych MySQL z kontrolą poziomów dostępu w oparciu środowisko graficzne Java FX.</li>
+                <li>Spring: Projekt w oparciu o framework Spring</li>
+                <li>Techniki front-end'owe: HTML, CSS, jQuery, javaScript</li>
+            </ul>
+            </div>
+
             <footer class='row margin_0 custom_footer'>
-                <span>Created by <a href="https://github.com/rafi1313">Rafał Borkowski</a> and <a href="https://github.com/IDontMind">Maja Misiewicz</a> Copyright &copy; BootCamp Reaktor PWN 2018</span>
-                <!--<div>-->
+                <div style="margin-left:550px;"><span>Created by <a href="https://github.com/rafi1313">Rafał Borkowski</a> and <a href="https://github.com/IDontMind">Maja Misiewicz</a> Copyright &copy; BootCamp Reaktor PWN 2018</span></div>
+                 <!--<div>-->
                     <!--<p class="row copyright margin_0"></p>-->
 
                 <!--</div>-->

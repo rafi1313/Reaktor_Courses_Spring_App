@@ -10,10 +10,10 @@ public class ContactService {
     ContactRepository contactRepository;
 
     @Autowired
-
     public ContactService(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
+
     public Contact createContact(Contact contact){
         Contact savedContact = contactRepository.save(contact);
         return savedContact;
